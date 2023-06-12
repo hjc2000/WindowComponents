@@ -1,0 +1,64 @@
+﻿* {
+	padding: 0;
+	margin: 0;
+}
+
+.root {
+	/*边框*/
+	border-color: black;
+	border-width: 1px;
+	border-style: solid;
+	/*定位*/
+	position: fixed;
+	/*弹性盒*/
+	display: flex;
+	flex-direction: column;
+	background-color: white;
+	z-index: 10;
+	width: fit-content;
+	height: fit-content;
+	margin: auto;
+	left: 0;
+	right: 0;
+	top: 0;
+	bottom: 0;
+}
+
+.content {
+	/*弹性盒*/
+	flex: 1;
+}
+
+.topBar {
+	/*盒子*/
+	height: 2em;
+	/*背景*/
+	background-color: rgb(230, 230, 230);
+	/*弹性盒*/
+	display: flex;
+	justify-content: flex-end;
+	align-items: center;
+	/*其它*/
+	overflow: hidden;
+	user-select: none;
+}
+
+	.topBar .closeButton {
+		text-align: center;
+		zoom: 1.5;
+		width: 1.5em;
+		background-color: rgba(255,255,255,0);
+	}
+
+		.topBar .closeButton:hover {
+			background-color: red;
+			cursor: pointer;
+		}
+
+	.topBar .titleBar {
+		flex: 1;
+		padding-left: 1.5em;
+		overflow: hidden;
+		font-weight: bold;
+		text-align: center;
+	}
