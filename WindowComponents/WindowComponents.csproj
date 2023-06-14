@@ -24,4 +24,8 @@
     <Folder Include="wwwroot\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\..\JSLib\JSLib\JSLib.csproj" />
+  </ItemGroup>
+
 </Project>
