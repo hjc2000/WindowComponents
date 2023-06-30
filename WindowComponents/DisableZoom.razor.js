@@ -33,5 +33,4 @@ export function DisableZoom()
 			event.preventDefault();
 		}
 	});
-
 }
