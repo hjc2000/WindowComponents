@@ -1,5 +1,8 @@
 ﻿@inject IJSRuntime _js
 
 <dialog @ref="_dialogElement">
-	@ChildContent
+	@if (ShouldRenderChildContent)
+	{
+		@ChildContent
+	}
 </dialog>

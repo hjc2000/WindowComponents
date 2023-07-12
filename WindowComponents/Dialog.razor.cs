@@ -4,18 +4,18 @@ using Microsoft.JSInterop;
 
 namespace WindowComponents;
 
-public partial class Dialog
+public partial class Dialog : IAsyncDisposable
 {
+	#region 生命周期
 	public Dialog()
 	{
-		_oncloseCallbackHelper.Action = () =>
+		_oncloseCallbackHelper.CallbackAction = async () =>
 		{
 			Console.WriteLine("弹窗关闭");
-			DialogClosed?.Invoke();
+			await DialogClosed.InvokeAsync();
 		};
 	}
 
-	#region 生命周期
 	protected override async Task OnAfterRenderAsync(bool firstRender)
 	{
 		if (firstRender)
@@ -26,6 +26,23 @@ public partial class Dialog
 			_initTcs.SetResult();
 		}
 	}
+
+	private bool _disposed = false;
+	public async ValueTask DisposeAsync()
+	{
+		if (_disposed)
+		{
+			return;
+		}
+
+		_disposed = true;
+		GC.SuppressFinalize(this);
+		Console.WriteLine("弹窗释放");
+		await _jsm.DisposeAsync();
+		await _jsop.DisposeAsync();
+		await _dialogWrapper.DisposeAsync();
+		_oncloseCallbackHelper.Dispose();
+	}
 	#endregion
 
 	private JSModule _jsm = default!;
@@ -35,10 +52,17 @@ public partial class Dialog
 	private ElementReference _dialogElement;
 	private CallbackHelper _oncloseCallbackHelper = new();
 
-	public event Action? DialogClosed;
+	[Parameter]
+	public EventCallback DialogClosed { get; set; }
 
 	[Parameter]
 	public RenderFragment? ChildContent { get; set; }
+
+	/// <summary>
+	/// 是否应该呈现子内容
+	/// </summary>
+	[Parameter]
+	public bool ShouldRenderChildContent { get; set; } = true;
 
 	/// <summary>
 	/// 显示对话框
