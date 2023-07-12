@@ -6,19 +6,33 @@ namespace WindowComponents;
 
 public partial class Dialog
 {
-	#region 生命周期
-	protected override async Task OnInitializedAsync()
+	public Dialog()
 	{
-		_jsmodule = await JSModule.CreateAsync(_js, "./_content/WindowComponents/Dialog.razor.js");
-		_jsop = await JSOp.CreateAsync(_js);
-		_initTcs.SetResult();
+		_oncloseCallbackHelper.Action = () =>
+		{
+			Console.WriteLine("弹窗关闭");
+		};
+	}
+
+	#region 生命周期
+	protected override async Task OnAfterRenderAsync(bool firstRender)
+	{
+		if (firstRender)
+		{
+			_jsm = await JSModule.CreateAsync(_js, "./_content/WindowComponents/Dialog.razor.js");
+			_dialogWrapper = await _jsm.InvokeAsync<IJSObjectReference>("DialogWrapper.create", _dialogElement, _oncloseCallbackHelper.DotNetHelper);
+			_jsop = await JSOp.CreateAsync(_js);
+			_initTcs.SetResult();
+		}
 	}
 	#endregion
 
-	private JSModule _jsmodule = default!;
+	private JSModule _jsm = default!;
 	private JSOp _jsop = default!;
+	private IJSObjectReference _dialogWrapper = default!;
 	private TaskCompletionSource _initTcs = new();
 	private ElementReference _dialogElement;
+	private CallbackHelper _oncloseCallbackHelper = new();
 
 	[Parameter]
 	public RenderFragment? ChildContent { get; set; }
@@ -30,7 +44,7 @@ public partial class Dialog
 	public async Task ShowModal()
 	{
 		await _initTcs.Task;
-		await _jsmodule.InvokeVoidAsync("showModal", _dialogElement);
+		await _dialogWrapper.InvokeVoidAsync("showModal", _dialogElement);
 	}
 
 	/// <summary>
@@ -40,6 +54,12 @@ public partial class Dialog
 	public async Task Close()
 	{
 		await _initTcs.Task;
-		await _jsmodule.InvokeVoidAsync("close", _dialogElement);
+		await _dialogWrapper.InvokeVoidAsync("close", _dialogElement);
+	}
+
+	public async Task<bool> IsOpen()
+	{
+		await _initTcs.Task;
+		return await _dialogWrapper.InvokeAsync<bool>("isOpened");
 	}
 }
