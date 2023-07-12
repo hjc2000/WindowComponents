@@ -11,6 +11,7 @@ public partial class Dialog
 		_oncloseCallbackHelper.Action = () =>
 		{
 			Console.WriteLine("弹窗关闭");
+			DialogClosed?.Invoke();
 		};
 	}
 
@@ -33,6 +34,8 @@ public partial class Dialog
 	private TaskCompletionSource _initTcs = new();
 	private ElementReference _dialogElement;
 	private CallbackHelper _oncloseCallbackHelper = new();
+
+	public event Action? DialogClosed;
 
 	[Parameter]
 	public RenderFragment? ChildContent { get; set; }
