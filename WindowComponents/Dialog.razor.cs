@@ -16,6 +16,11 @@ public partial class Dialog : IAsyncDisposable
 		};
 	}
 
+	~Dialog()
+	{
+		_ = DisposeAsync();
+	}
+
 	protected override async Task OnAfterRenderAsync(bool firstRender)
 	{
 		if (firstRender)
