@@ -25,7 +25,7 @@ public partial class Dialog : IAsyncDisposable
 	{
 		if (firstRender)
 		{
-			_jsm = await JSModule.CreateAsync(_js, "./_content/WindowComponents/Dialog.razor.js");
+			_jsm = new JSModule(_js, "./_content/WindowComponents/Dialog.razor.js");
 			_dialogWrapper = await _jsm.InvokeAsync<IJSObjectReference>("DialogWrapper.create", _dialogElement, _oncloseCallbackHelper.DotNetHelper);
 			_initTcs.SetResult();
 		}
