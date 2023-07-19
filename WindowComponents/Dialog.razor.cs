@@ -25,7 +25,7 @@ public partial class Dialog : IAsyncDisposable
 	{
 		if (firstRender)
 		{
-			_jsm = new JSModule(_js, "./_content/WindowComponents/Dialog.razor.js");
+			_jsm = new JSModule(_jsrt, "./_content/WindowComponents/Dialog.razor.js");
 			_dialogWrapper = await _jsm.InvokeAsync<IJSObjectReference>("DialogWrapper.create", _dialogElement, _oncloseCallbackHelper.DotNetHelper);
 			_initTcs.SetResult();
 		}
@@ -41,7 +41,8 @@ public partial class Dialog : IAsyncDisposable
 
 		_disposed = true;
 		GC.SuppressFinalize(this);
-		Console.WriteLine("弹窗释放");
+
+		Console.WriteLine("Dialog 释放");
 		await _jsm.DisposeAsync();
 		await _dialogWrapper.DisposeAsync();
 		_oncloseCallbackHelper.Dispose();
