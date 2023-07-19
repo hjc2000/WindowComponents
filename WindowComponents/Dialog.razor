@@ -1,4 +1,6 @@
-﻿@inject IJSRuntime _js
+﻿@using JSLib;
+@inject IJSRuntime _js
+@inject JSOp _jsop
 
 <dialog @ref="_dialogElement">
 	@if (ShouldRenderChildContent)
