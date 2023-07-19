@@ -42,7 +42,7 @@ public partial class HiddenFunction : IAsyncDisposable
 	private JSModule _jsm = default!;
 
 	/// <summary>
-	/// js 的 Dependencies 类的对象的引用
+	/// js 的 HiddenFunction 类的对象的引用
 	/// </summary>
 	private IJSObjectReference _js_HiddenFunction = default!;
 	private CallbackHelper _showHiddenFunctionCallback = new();
@@ -55,13 +55,13 @@ public partial class HiddenFunction : IAsyncDisposable
 		{
 			_hiddenFunction = value;
 			Console.WriteLine("显示隐藏功能");
-			HiddenFunctionChanged?.Invoke();
+			ShouldShowHiddenFunctionChanged?.Invoke();
 		}
 	}
 
 	/// <summary>
 	/// HiddenFunction 属性改变事件
 	/// </summary>
-	public static event Action? HiddenFunctionChanged;
+	public static event Action? ShouldShowHiddenFunctionChanged;
 	#endregion
 }
