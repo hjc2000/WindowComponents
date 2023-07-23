@@ -14,7 +14,7 @@ public partial class HiddenFunction : IAsyncDisposable
 
 	protected override async Task OnInitializedAsync()
 	{
-		Console.WriteLine("HiddenFunction 初始化");
+		Console.WriteLine("hf 初始化");
 		_jsm = new(_jrt, "./_content/WindowComponents/HiddenFunction.razor.js");
 		_js_HiddenFunction = await _jsm.InvokeAsync<IJSObjectReference>("HiddenFunction.create", _showHiddenFunctionCallback.DotNetHelper);
 	}
