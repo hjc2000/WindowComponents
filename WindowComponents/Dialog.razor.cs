@@ -62,12 +62,6 @@ public partial class Dialog : IAsyncDisposable
 	public RenderFragment? ChildContent { get; set; }
 
 	/// <summary>
-	/// 是否应该呈现子内容
-	/// </summary>
-	[Parameter]
-	public bool ShouldRenderChildContent { get; set; } = true;
-
-	/// <summary>
 	/// 显示对话框
 	/// </summary>
 	/// <returns></returns>
