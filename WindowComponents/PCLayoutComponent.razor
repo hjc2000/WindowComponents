@@ -2,7 +2,7 @@
 
 @*根节点占据全部视觉宽高，溢出隐藏*@
 <div class="root">
-	<div @ref="_left_menu_element" class="menu">
+	<div @ref="_left_menu_element" class="left-menu">
 		@LeftMenu
 	</div>
 	<div class="top-bar">
@@ -13,5 +13,8 @@
 	</div>
 	<div class="state-bar">
 		@StateBar
+	</div>
+	<div class="hide-left-menu-button" @onclick="On_hide_left_menu_button_click">
+		@Hide_left_menu_button
 	</div>
 </div>

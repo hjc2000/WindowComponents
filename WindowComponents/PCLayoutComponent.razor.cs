@@ -12,11 +12,33 @@ public partial class PCLayoutComponent
 		_jsop = new JSOp(_jsrt);
 		_jsm = new JSModule(_jsrt, "./_content/WindowComponents/PCLayoutComponent.razor.js");
 		_initTcs.SetResult();
+		_init_left_menu_width = await Get_left_menu_width();
+		await Set_left_menu_width(_init_left_menu_width);
 	}
 
 	private JSOp _jsop = default!;
 	private JSModule _jsm = default!;
 	private TaskCompletionSource _initTcs = new();
+
+	/// <summary>
+	/// 左侧边栏初始的宽度
+	/// </summary>
+	private int _init_left_menu_width = 0;
+	private bool _hided = false;
+
+	private async Task On_hide_left_menu_button_click()
+	{
+		if (_hided)
+		{
+			await Set_left_menu_width(_init_left_menu_width);
+		}
+		else
+		{
+			await Set_left_menu_width(0);
+		}
+
+		_hided = !_hided;
+	}
 
 	/// <summary>
 	/// 获取侧边栏的宽度
@@ -58,4 +80,7 @@ public partial class PCLayoutComponent
 
 	[Parameter]
 	public RenderFragment? StateBar { get; set; }
+
+	[Parameter]
+	public RenderFragment? Hide_left_menu_button { get; set; }
 }
