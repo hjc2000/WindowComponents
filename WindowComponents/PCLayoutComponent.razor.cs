@@ -13,8 +13,16 @@ public partial class PCLayoutComponent
 		_jsop = new JSOp(_jsrt);
 		_jsm = new JSModule(_jsrt, "./_content/WindowComponents/PCLayoutComponent.razor.js");
 		_initTcs.SetResult();
-		_init_left_menu_width = await Get_left_menu_width();
-		await Set_left_menu_width(_init_left_menu_width);
+		async Task init_width_style()
+		{
+			/* 初始化的时候先获取当前的计算样式的宽度，然后设置一遍，将计算样式应用到内联样式中
+			 * 如果不这么做，宽度变化的过渡效果不会生效。想要生效必须初始时有明确设置一个固定宽度。
+			 */
+			_init_left_menu_width = await Get_left_menu_width();
+			await Set_left_menu_width(_init_left_menu_width);
+		}
+
+		await init_width_style();
 	}
 
 	private JSOp _jsop = default!;
