@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Components;
 using Microsoft.JSInterop;
 
 namespace WindowComponents;
+
 public partial class PCLayoutComponent
 {
 	protected override async Task OnAfterRenderAsync(bool firstRender)
@@ -24,20 +25,18 @@ public partial class PCLayoutComponent
 	/// 左侧边栏初始的宽度
 	/// </summary>
 	private int _init_left_menu_width = 0;
-	private bool _hided = false;
 
 	private async Task On_hide_left_menu_button_click()
 	{
-		if (_hided)
-		{
-			await Set_left_menu_width(_init_left_menu_width);
-		}
-		else
+		int width = await Get_left_menu_width();
+		if (width > 0)
 		{
 			await Set_left_menu_width(0);
 		}
-
-		_hided = !_hided;
+		else
+		{
+			await Set_left_menu_width(_init_left_menu_width);
+		}
 	}
 
 	/// <summary>
@@ -81,6 +80,9 @@ public partial class PCLayoutComponent
 	[Parameter]
 	public RenderFragment? StateBar { get; set; }
 
+	/// <summary>
+	/// 用于隐藏左侧边栏的按钮。如果设置了本参数，则内置的按钮将被禁用，转而使用这个
+	/// </summary>
 	[Parameter]
 	public RenderFragment? Hide_left_menu_button { get; set; }
 }

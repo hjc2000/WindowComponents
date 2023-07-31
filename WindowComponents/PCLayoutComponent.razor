@@ -15,6 +15,14 @@
 		@StateBar
 	</div>
 	<div class="hide-left-menu-button" @onclick="On_hide_left_menu_button_click">
-		@Hide_left_menu_button
+		@if (Hide_left_menu_button is null)
+		{
+			@*☰☱☲☳☴☵☶☷*@
+			<button>☰</button>
+		}
+		else
+		{
+			@Hide_left_menu_button
+		}
 	</div>
 </div>
