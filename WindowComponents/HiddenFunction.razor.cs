@@ -50,7 +50,11 @@ public partial class HiddenFunction : IAsyncDisposable
 	private static bool _hiddenFunction = false;
 	public static bool ShouldShowHiddenFunction
 	{
-		get => _hiddenFunction;
+		get
+		{
+			return _hiddenFunction;
+		}
+
 		set
 		{
 			_hiddenFunction = value;
