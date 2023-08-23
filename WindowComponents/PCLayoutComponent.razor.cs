@@ -9,7 +9,11 @@ public partial class PCLayoutComponent
 	protected override async Task OnAfterRenderAsync(bool firstRender)
 	{
 		await ValueTask.CompletedTask;
-		if (!firstRender) return;
+		if (!firstRender)
+		{
+			return;
+		}
+
 		_jsop = new JSOp(_jsrt);
 		_jsm = new JSModule(_jsrt, "./_content/WindowComponents/PCLayoutComponent.razor.js");
 		_initTcs.SetResult();
