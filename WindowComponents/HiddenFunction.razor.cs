@@ -4,9 +4,10 @@ using Microsoft.JSInterop;
 namespace WindowComponents;
 public partial class HiddenFunction : IAsyncDisposable
 {
+	#region 生命周期
 	public HiddenFunction()
 	{
-		_showHiddenFunctionCallback.CallbackAction = () =>
+		_show_hidden_function_callback_helper.CallbackAction = () =>
 		{
 			ShouldShowHiddenFunction = true;
 		};
@@ -14,9 +15,8 @@ public partial class HiddenFunction : IAsyncDisposable
 
 	protected override async Task OnInitializedAsync()
 	{
-		Console.WriteLine("hf 初始化");
-		_jsm = new(_jrt, "./_content/WindowComponents/HiddenFunction.razor.js");
-		_js_HiddenFunction = await _jsm.InvokeAsync<IJSObjectReference>("HiddenFunction.create", _showHiddenFunctionCallback.DotNetHelper);
+		_jsm = new(_jsrt, "./_content/WindowComponents/HiddenFunction.razor.js");
+		_js_HiddenFunction = await _jsm.InvokeAsync<IJSObjectReference>("HiddenFunction.create", _show_hidden_function_callback_helper.DotNetHelper);
 	}
 
 	private bool _disposed = false;
@@ -37,27 +37,26 @@ public partial class HiddenFunction : IAsyncDisposable
 			await _js_HiddenFunction.DisposeAsync();
 		}
 	}
+	#endregion
 
-	#region 隐藏功能
 	private JSModule _jsm = default!;
 
 	/// <summary>
 	/// js 的 HiddenFunction 类的对象的引用
 	/// </summary>
 	private IJSObjectReference _js_HiddenFunction = default!;
-	private CallbackHelper _showHiddenFunctionCallback = new();
+	private CallbackHelper _show_hidden_function_callback_helper = new();
 
-	private static bool _hiddenFunction = false;
+	private static bool _should_show_hidden_function = false;
 	public static bool ShouldShowHiddenFunction
 	{
 		get
 		{
-			return _hiddenFunction;
+			return _should_show_hidden_function;
 		}
-
 		set
 		{
-			_hiddenFunction = value;
+			_should_show_hidden_function = value;
 			Console.WriteLine("显示隐藏功能");
 			ShouldShowHiddenFunctionChanged?.Invoke();
 		}
@@ -67,5 +66,4 @@ public partial class HiddenFunction : IAsyncDisposable
 	/// HiddenFunction 属性改变事件
 	/// </summary>
 	public static event Action? ShouldShowHiddenFunctionChanged;
-	#endregion
 }

@@ -1,17 +1,17 @@
 export class HiddenFunction
 {
-	static create(callbackHelper)
+	static create(show_hidden_function_callback_helper)
 	{
-		return new HiddenFunction(callbackHelper);
+		return new HiddenFunction(show_hidden_function_callback_helper);
 	}
 
-	constructor(callbackHelper)
+	constructor(show_hidden_function_callback_helper)
 	{
-		this.callbackHelper = callbackHelper;
+		this._show_hidden_function_callback_helper = show_hidden_function_callback_helper;
 		window.hf = () =>
 		{
-			this.callbackHelper.invokeMethodAsync("Invoke");
-			return true;
+			this._show_hidden_function_callback_helper.invokeMethodAsync("Invoke");
+			return "hf 开启";
 		};
 	}
 }
