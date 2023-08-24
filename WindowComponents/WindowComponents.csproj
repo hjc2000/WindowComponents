@@ -5,9 +5,9 @@
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
-    <Version>1.0.21</Version>
-    <PackageProjectUrl>https://github.com/hjc2000/st8630web</PackageProjectUrl>
-    <RepositoryUrl>https://github.com/hjc2000/st8630web</RepositoryUrl>
+    <Version>1.0.0</Version>
+    <PackageProjectUrl>https://github.com/hjc2000/WindowComponents</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/hjc2000/WindowComponents.git</RepositoryUrl>
     <Authors>hjc</Authors>
   </PropertyGroup>
 
