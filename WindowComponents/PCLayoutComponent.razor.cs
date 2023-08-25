@@ -22,8 +22,8 @@ public partial class PCLayoutComponent
 			/* 初始化的时候先获取当前的计算样式的宽度，然后设置一遍，将计算样式应用到内联样式中
 			 * 如果不这么做，宽度变化的过渡效果不会生效。想要生效必须初始时有明确设置一个固定宽度。
 			 */
-			_init_left_menu_width = await Get_left_menu_width();
-			await Set_left_menu_width(_init_left_menu_width);
+			_init_left_menu_width = await GetLeftMenuWidth();
+			await SetLeftMenuWidth(_init_left_menu_width);
 		}
 
 		await init_width_style();
@@ -38,16 +38,16 @@ public partial class PCLayoutComponent
 	/// </summary>
 	private int _init_left_menu_width = 0;
 
-	private async Task On_hide_left_menu_button_click()
+	private async Task HideLeftMenu()
 	{
-		int width = await Get_left_menu_width();
+		int width = await GetLeftMenuWidth();
 		if (width > 0)
 		{
-			await Set_left_menu_width(0);
+			await SetLeftMenuWidth(0);
 		}
 		else
 		{
-			await Set_left_menu_width(_init_left_menu_width);
+			await SetLeftMenuWidth(_init_left_menu_width);
 		}
 	}
 
@@ -55,9 +55,9 @@ public partial class PCLayoutComponent
 	/// 获取侧边栏的宽度
 	/// </summary>
 	/// <returns></returns>
-	public async Task<int> Get_left_menu_width()
+	public async Task<int> GetLeftMenuWidth()
 	{
-		string width_string = await Get_left_menu_width_string();
+		string width_string = await GetLeftMenuWidthString();
 		width_string = width_string[..(^2)];
 		return int.Parse(width_string);
 	}
@@ -66,13 +66,13 @@ public partial class PCLayoutComponent
 	/// 设置侧边栏的宽度
 	/// </summary>
 	/// <returns></returns>
-	public async Task Set_left_menu_width(int width)
+	public async Task SetLeftMenuWidth(int width)
 	{
 		await _initTcs.Task;
 		await _jsm.InvokeVoidAsync("set_element_width_string", _left_menu_element, $"{width}px");
 	}
 
-	private async Task<string> Get_left_menu_width_string()
+	private async Task<string> GetLeftMenuWidthString()
 	{
 		await _initTcs.Task;
 		return await _jsm.InvokeAsync<string>("get_element_width_string", _left_menu_element);
@@ -96,5 +96,5 @@ public partial class PCLayoutComponent
 	/// 用于隐藏左侧边栏的按钮。如果设置了本参数，则内置的按钮将被禁用，转而使用这个
 	/// </summary>
 	[Parameter]
-	public RenderFragment? Hide_left_menu_button { get; set; }
+	public RenderFragment? HideLeftMenuButton { get; set; }
 }

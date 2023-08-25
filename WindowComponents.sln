@@ -5,6 +5,8 @@ VisualStudioVersion = 17.6.33723.286
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WindowComponents", "WindowComponents\WindowComponents.csproj", "{D9FA41CD-F6CB-4048-A3E6-9931E541230D}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JSLib", "..\JSLib\JSLib\JSLib.csproj", "{9384AEFB-63EA-4554-B23A-95BAB88C9511}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{D9FA41CD-F6CB-4048-A3E6-9931E541230D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D9FA41CD-F6CB-4048-A3E6-9931E541230D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D9FA41CD-F6CB-4048-A3E6-9931E541230D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9384AEFB-63EA-4554-B23A-95BAB88C9511}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9384AEFB-63EA-4554-B23A-95BAB88C9511}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9384AEFB-63EA-4554-B23A-95BAB88C9511}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9384AEFB-63EA-4554-B23A-95BAB88C9511}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
