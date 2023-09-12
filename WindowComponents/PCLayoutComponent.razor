@@ -14,11 +14,11 @@
 	<div class="state-bar">
 		@StateBar
 	</div>
-	<div class="hide-left-menu-button" @onclick="HideLeftMenu">
+	<div class="hide-left-menu-button-box" @onclick="HideLeftMenu">
 		@if (HideLeftMenuButton is null)
 		{
 			@*☰☱☲☳☴☵☶☷*@
-			<button>☰</button>
+			<button class="hide-left-menu-button">☰</button>
 		}
 		else
 		{

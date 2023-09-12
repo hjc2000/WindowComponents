@@ -23,13 +23,20 @@
 	transition: width 0.5s;
 }
 
-.hide-left-menu-button {
+.hide-left-menu-button-box {
 	position: relative;
 	top: 6px;
 	grid-row: 1;
 	grid-column: 2;
 	height: fit-content;
 	width: fit-content;
+	padding: 0;
+	margin: 0;
+}
+
+.hide-left-menu-button {
+	padding: 0;
+	margin: 0;
 }
 
 .top-bar {
